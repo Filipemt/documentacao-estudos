@@ -26,6 +26,7 @@ public class Cliente {
   @Column(nullable = false)
   private String nome;
 }
+```
 
 ### 🔗 Relacionamentos com JPA:
 
@@ -45,6 +46,7 @@ public class Pedido {
   @ManyToOne
   private Cliente cliente;
 }
+```
 
 ### 📦 Repositórios com Spring Data JPA:
 
@@ -55,6 +57,7 @@ Ao usar `JpaRepository`, temos acesso a vários métodos prontos, sem precisar e
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     List<Cliente> findByNomeContaining(String nome);
 }
+```
 
 #### 🔍 Métodos comuns disponíveis:
 
@@ -75,6 +78,7 @@ Você pode personalizar suas consultas de três formas:
    ```java
    List<Cliente> findByNome(String nome);
    List<Cliente> findByEmailContaining(String email);
+    ```
 
    2. **Com `@Query` (JPQL ou SQL)**  
    Ideal quando a convenção de nome não é suficiente:
@@ -82,6 +86,7 @@ Você pode personalizar suas consultas de três formas:
    ```java
    @Query("SELECT c FROM Cliente c WHERE c.nome = :nome")
    List<Cliente> buscarPorNome(@Param("nome") String nome);
+   ```
 
    3. **Query nativa (`nativeQuery = true`)**  
    Quando você quer usar SQL direto:
@@ -89,6 +94,7 @@ Você pode personalizar suas consultas de três formas:
    ```java
    @Query(value = "SELECT * FROM cliente WHERE nome = :nome", nativeQuery = true)
    List<Cliente> buscarPorNomeSQL(@Param("nome") String nome);
+   ```
 
    ### 🧠 Boas práticas com Spring + Banco:
 
